@@ -1,10 +1,14 @@
-DOCKER_DIR=docker
+DOCKER_DIR=Docker
 
-all: base_image box_image
+all: apache DHCP DNS FTP quagga
 	@
 
-base_image: base_image
-box_image: box_image
+apache: apache
+DHCP: DHCP
+DNS: DNS
+FTP: FTP
+quagga: quagga
+
 
 # Generic rule
 %:
