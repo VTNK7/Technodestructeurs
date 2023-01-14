@@ -2,7 +2,7 @@ DOCKER_DIR=Docker
 
 all: apache DHCP DNS FTP quagga
 	@
-
+	
 apache: apache
 DHCP: DHCP
 DNS: DNS
