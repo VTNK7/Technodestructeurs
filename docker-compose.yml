@@ -1,0 +1,39 @@
+services:
+  ### AS core network ###
+
+  box:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: box_image
+    networks:
+      public:
+        ipv4_address: 120.0.40.2
+      reseau_client_1:
+        ipv4_address: 192.168.0.2
+
+  client_1:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: base_image
+    networks:
+      reseau_client_1:
+        ipv4_address: 192.168.0.6
+
+
+networks:
+  reseau_client_1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+
+  public:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 120.0.40.0/21
+
