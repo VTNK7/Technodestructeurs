@@ -11,7 +11,7 @@ services:
       reseau_box:
         ipv4_address: 120.0.33.2
       reseau_client_1:
-        ipv4_address: 192.168.0.2
+        ipv4_address: 192.168.1.2
 
   box_2:
     tty: true
@@ -23,27 +23,27 @@ services:
       reseau_box:
         ipv4_address: 120.0.33.3
       reseau_client_2:
-        ipv4_address: 192.168.0.2
+        ipv4_address: 192.168.2.2
 
   client_1:
     tty: true
     extends:
       file: ./docker-compose-all.yml
       service: base
-    image: quagga
+    image: client
     networks:
       reseau_client_1:
-        ipv4_address: 192.168.0.6
+        ipv4_address: 192.168.1.6
 
   client_2:
     tty: true
     extends:
       file: ./docker-compose-all.yml
       service: base
-    image: base_image
+    image: client
     networks:
       reseau_client_1:
-        ipv4_address: 192.168.0.7
+        ipv4_address: 192.168.1.7
 
 
 networks:
@@ -51,13 +51,13 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.0.0/24
+        - subnet: 192.168.1.0/24
 
   reseau_client_2:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.0.0/24
+        - subnet: 192.168.2.0/24
 
   reseau_box:
     driver: bridge
