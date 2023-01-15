@@ -27,3 +27,6 @@
 
 ### How to build ?
     # docker build --tag quagga:latest /YANE/images/quagga
+
+
+/etc/init.d/quagga start &&
