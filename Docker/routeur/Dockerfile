@@ -1,4 +1,4 @@
-FROM debian
+FROM ubuntu
 RUN apt-get update
 RUN apt-get -y install nano iptables apt-utils iproute2 net-tools systemd telnet iputils-ping tcpdump inetutils-traceroute frr
 RUN apt-get -f install
