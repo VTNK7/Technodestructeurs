@@ -1,0 +1,94 @@
+services:
+  ### AS core network ###
+
+  box_1:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: client
+    networks:
+      reseau_box:
+        ipv4_address: 120.0.33.11
+      reseau_client_1:
+        ipv4_address: 192.168.1.11
+
+  box_2:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: client
+    networks:
+      reseau_box:
+        ipv4_address: 120.0.33.12
+      reseau_client_2:
+        ipv4_address: 192.168.2.12
+
+  client_1:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: client
+    networks:
+      reseau_client_1:
+        ipv4_address: 192.168.1.254
+
+  client_2:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: routeur
+    networks:
+      reseau_client_2:
+        ipv4_address: 192.168.2.254
+
+  routeur_1:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: routeur
+    networks:
+      reseau_box:
+        ipv4_address: 120.0.33.13
+      reseau_1:
+        ipv4_address: 120.0.40.11
+
+  routeur_main:
+    tty: true
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: routeur
+    networks:
+      reseau_1:
+        ipv4_address: 120.0.40.12
+
+      
+networks:
+  reseau_client_1:
+
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+
+  reseau_client_2:
+
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+
+  reseau_box:
+
+    ipam:
+      config:
+        - subnet: 120.0.33.0/24
+
+  reseau_1:
+    ipam:
+      config:
+        - subnet: 120.0.40.0/21
+

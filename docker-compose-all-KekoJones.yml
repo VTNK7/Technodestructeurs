@@ -1,0 +1,4 @@
+services:
+  base:
+    privileged: true # run in privileged mode
+    user: "root"
