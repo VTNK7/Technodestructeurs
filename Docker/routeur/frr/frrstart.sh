@@ -1,4 +1,5 @@
-#!/bin/ash
+#!/bin/sh
 
 # Restore saved config
-frr service start
+service frr start
+tail -f /dev/null
