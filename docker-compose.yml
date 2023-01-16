@@ -47,6 +47,8 @@ services:
 
   routeur_1:
     tty: true
+    volumes:
+      - ./data/router_1:/data
     extends:
       file: ./docker-compose-all.yml
       service: base
