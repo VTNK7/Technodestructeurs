@@ -3,10 +3,12 @@ services:
 
   box_1:
     tty: true
+    volumes:
+      - ./data/box_c1:/data
     extends:
       file: ./docker-compose-all.yml
       service: base
-    image: client
+    image: routeur
     networks:
       reseau_box:
         ipv4_address: 120.0.33.11
