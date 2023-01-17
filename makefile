@@ -1,20 +1,19 @@
-DOCKER_DIR=Docker
+all: router dns ftp client box apache
 
-all: apache DHCP DNS FTP quagga
-	@
-	
-apache: apache
-DHCP: DHCP
-DNS: DNS
-FTP: FTP
-quagga: quagga
+router:
+	docker build -t router Docker/router
 
+dns:
+	docker build -t dns Docker/dns
 
-# Generic rule
-%:
-	docker build -t $@ $(DOCKER_DIR)/$@
+ftp:
+	docker build -t ftp Docker/ftp
 
+client:
+	docker build -t client Docker/client
 
-# to remove all built images
-clean:
-	docker image rm -f $(shell ls $(DOCKER_DIR))
+box:
+	docker build -t box Docker/box
+
+apache:
+	docker build -t apache Docker/apache

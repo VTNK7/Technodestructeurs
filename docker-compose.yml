@@ -22,7 +22,7 @@ services:
     extends:
       file: ./docker-compose-all.yml
       service: base
-    image: routeur
+    image: router
     networks:
       reseau_box:
         ipv4_address: 120.0.33.12
