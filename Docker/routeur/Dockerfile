@@ -7,6 +7,7 @@ RUN mkdir usr/frr
 COPY ./frr/daemons /etc/frr/daemons
 COPY ./frr/frrstart.sh /usr/frrstart.sh
 RUN mkdir -p /run/frr && chown -R frr:frr /run/frr
-ENTRYPOINT /data/init.sh; /usr/frrstart.sh;
+CMD ["vtysh"]
+ENTRYPOINT /data/init.sh; exec /usr/frrstart.sh;
 
 
