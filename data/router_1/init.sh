@@ -1,8 +1,7 @@
 #!/bin/sh
-set -x
-
+echo box_c1
 cp -R /data/frr/* /etc/frr/
-chown -R frr:frr /etc/frr/
-service frr start
+chown -R frr:frr /etc/frr/s
 ip route delete default
+service frr start
 tail -f /dev/null

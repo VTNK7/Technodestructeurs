@@ -63,7 +63,7 @@ services:
     image: client
     networks:
       reseau_site1:
-        ipv4_address: 120.0.36.11
+        ipv4_address: 120.0.36.13
 
   client_site2:
     tty: true
