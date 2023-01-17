@@ -147,19 +147,18 @@ services:
       reseau_sites:
         ipv4_address: 120.0.32.141
 
-  dns_ste1:
-    tty: true
-    extends:
-      file: ./docker-compose-all.yml
-      service: base
+
+  apache:
+    image: httpd:latest
+    container_name: my-apache-app
+    ports:
+    - '8080:80'
     volumes:
-      - ./named.conf:/etc/bind/named.conf
-      - ./zones/db.technodestructeurs.com.zone:/etc/bind/zones/db.technodestructeurs.com.zone
-    image: dns
+    - ./data/web-entreprise:/data
+    - ./website:/usr/local/apache2/htdocs
     networks:
       reseau_site1:
-        ipv4_address: 120.0.36.15
-
+        ipv4_address: 120.0.36.51/22
       
 networks:
   reseau_client_1:
