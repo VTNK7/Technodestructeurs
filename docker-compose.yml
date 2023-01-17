@@ -159,6 +159,15 @@ services:
     networks:
       reseau_site1:
         ipv4_address: 120.0.36.51/22
+
+dns_server:
+  build: dns
+  container_name: dns_server
+  hostname:  dns_server
+  networks:
+    reseau_site1:
+      ipv4_address: 120.0.36.51
+  privileged: true
       
 networks:
   reseau_client_1:
