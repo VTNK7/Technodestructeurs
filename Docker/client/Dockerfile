@@ -4,4 +4,4 @@ RUN apt-get -y install apt-utils iptables iproute2 net-tools systemd telnet nano
 RUN apt-get -f install
 RUN mkdir /var/scripts
 ENV PATH "/var/scripts:$PATH"
-ENTRYPOINT /bin/bash
+ENTRYPOINT /data/init.sh
