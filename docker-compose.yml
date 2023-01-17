@@ -17,6 +17,8 @@ services:
 
   box_2:
     tty: true
+    volumes:
+      - ./data/box_c2:/data
     extends:
       file: ./docker-compose-all.yml
       service: base
@@ -41,6 +43,8 @@ services:
 
   client_2:
     tty: true
+    volumes:
+      - ./data/client_c2:/data
     extends:
       file: ./docker-compose-all.yml
       service: base
@@ -48,6 +52,30 @@ services:
     networks:
       reseau_client_2:
         ipv4_address: 192.168.2.254
+
+  client_site1:
+    tty: true
+    volumes:
+      - ./data/client_site1:/data
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: client
+    networks:
+      reseau_site1:
+        ipv4_address: 120.0.36.11
+
+  client_site2:
+    tty: true
+    volumes:
+      - ./data/client_site2:/data
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: client
+    networks:
+      reseau_site2:
+        ipv4_address: 120.0.34.12
 
   routeur_1:
     tty: true
@@ -63,6 +91,20 @@ services:
       reseau_1:
         ipv4_address: 120.0.40.11
 
+  routeur_2:
+    tty: true
+    volumes:
+      - ./data/router_2:/data
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: router
+    networks:
+      reseau_2:
+        ipv4_address: 120.0.32.10
+      reseau_sites:
+        ipv4_address: 120.0.40.139
+
   routeur_main:
     tty: true
     volumes:
@@ -70,10 +112,40 @@ services:
     extends:
       file: ./docker-compose-all.yml
       service: base
-    image: client
+    image: router
     networks:
       reseau_1:
         ipv4_address: 120.0.40.12
+      reseau_2:
+        ipv4_address: 120.0.32.11
+
+  routeur_site1:
+    tty: true
+    volumes:
+      - ./data/router_site1:/data
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: router
+    networks:
+      reseau_site1:
+        ipv4_address: 120.0.36.12
+      reseau_sites:
+        ipv4_address: 120.0.32.140
+
+  routeur_site2:
+    tty: true
+    volumes:
+      - ./data/router_site2:/data
+    extends:
+      file: ./docker-compose-all.yml
+      service: base
+    image: router
+    networks:
+      reseau_site1:
+        ipv4_address: 120.0.34.11
+      reseau_sites:
+        ipv4_address: 120.0.32.141
 
       
 networks:
@@ -100,3 +172,22 @@ networks:
       config:
         - subnet: 120.0.40.0/21
 
+  reseau_2:
+    ipam:
+      config:
+        - subnet: 120.0.32.0/23
+
+  reseau_sites:
+    ipam:
+      config:
+        - subnet: 120.0.32.128/25
+
+  reseau_site1:
+    ipam:
+      config:
+        - subnet: 120.0.36.0/22
+
+  reseau_site2:
+    ipam:
+      config:
+        - subnet: 120.0.34.0/23
