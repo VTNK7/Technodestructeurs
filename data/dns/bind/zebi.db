@@ -1,0 +1,14 @@
+
+;
+$TTL    604800
+@       IN      SOA     technodestructeurs.com. root.technodestructeurs.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+        IN      A       120.0.36.52
+;
+@       IN      NS      ns.technodestructeurs.com.
+www     IN      A       120.0.36.51
+ns      IN      A       120.0.36.52

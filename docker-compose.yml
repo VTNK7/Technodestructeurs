@@ -147,28 +147,35 @@ services:
       reseau_sites:
         ipv4_address: 120.0.32.141
 
+  dns:
+    image: dns
+    cap_add:
+      - NET_ADMIN
+      - ALL
+    volumes:
+      - ./data/dns:/data
+    networks:
+      reseau_site1:
+        ipv4_address: 120.0.36.52
 
   apache:
-    image: httpd:latest
-    container_name: my-apache-app
+    cap_add:
+      - NET_ADMIN
+      - ALL
+    environment:
+      HTTPD_ROOT: /usr/local/apache2/htdocs/
+    image: apache
+    container_name: web
     ports:
     - '8080:80'
     volumes:
-    - ./data/web-entreprise:/data
+    - ./data/web:/data
     - ./website:/usr/local/apache2/htdocs
     networks:
       reseau_site1:
-        ipv4_address: 120.0.36.51/22
+        ipv4_address: 120.0.36.51
 
-dns_server:
-  build: dns
-  container_name: dns_server
-  hostname:  dns_server
-  networks:
-    reseau_site1:
-      ipv4_address: 120.0.36.51
-  privileged: true
-      
+
 networks:
   reseau_client_1:
 
